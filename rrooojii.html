@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Roji | 2026</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,700;1,700&family=Dancing+Script:wght@600&display=swap');
+
+        :root {
+            --bg-color: #0d0d0f;
+            --accent-primary: #d4a5ff; 
+            --accent-secondary: #ff9fb2; 
+            --text-main: #ffffff;
+            --text-muted: rgba(255, 255, 255, 0.6);
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ambient-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; overflow: hidden;
+        }
+
+        .blob {
+            position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.2;
+            animation: drift 25s infinite alternate;
+        }
+        .blob-1 { width: 600px; height: 600px; background: var(--accent-primary); top: -10%; left: -10%; }
+        .blob-2 { width: 700px; height: 700px; background: var(--accent-secondary); bottom: -10%; right: -10%; }
+
+        @keyframes drift {
+            from { transform: translate(0, 0) scale(1); }
+            to { transform: translate(150px, 100px) scale(1.1); }
+        }
+
+        #cursor {
+            width: 20px; height: 20px; background: #fff; border-radius: 50%;
+            position: fixed; pointer-events: none; z-index: 9999;
+            transition: transform 0.1s ease; mix-blend-mode: difference;
+        }
+
+        .content-wrapper { width: 90%; max-width: 900px; position: relative; }
+
+        section {
+            display: none; text-align: center; opacity: 0;
+            transform: translateY(20px); transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        section.active { display: block; opacity: 1; transform: translateY(0); }
+
+        h1 {
+            font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 8vw, 4.5rem);
+            margin-bottom: 1rem; background: linear-gradient(135deg, #fff 30%, var(--accent-primary) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+
+        .message-card {
+            background: var(--glass); border: 1px solid var(--glass-border);
+            padding: 3rem 2rem; border-radius: 32px; backdrop-filter: blur(25px);
+            margin-top: 1rem; position: relative; overflow: hidden;
+        }
+
+        .quote-icon {
+            font-family: 'Dancing Script', cursive;
+            font-size: 5rem;
+            color: var(--accent-primary);
+            opacity: 0.3;
+            line-height: 0;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .cake-area {
+            display: flex; justify-content: center; align-items: flex-end;
+            gap: 12px; height: 100px; margin-bottom: 25px;
+        }
+        .candle-wrapper { position: relative; width: 14px; height: 75px; }
+        .candle {
+            width: 100%; height: 55px;
+            background: linear-gradient(to bottom, var(--accent-primary), var(--accent-secondary));
+            border-radius: 4px; position: absolute; bottom: 0;
+        }
+        .flame {
+            width: 12px; height: 22px; background: #ffde7a;
+            border-radius: 50% 50% 20% 20%; position: absolute;
+            top: -20px; left: 1px; box-shadow: 0 0 15px #ffde7a;
+            animation: flicker 0.6s infinite alternate;
+            transition: 0.7s ease-out;
+        }
+        @keyframes flicker { 0% { transform: scale(1); } 100% { transform: scale(1.15) rotate(2deg); } }
+        .flame.blown-out { transform: scale(0); opacity: 0; }
+
+        .cta-btn {
+            background: #fff; color: #000; border: none; padding: 1.1rem 2.8rem;
+            border-radius: 100px; font-weight: 800; text-transform: uppercase;
+            font-size: 0.85rem; letter-spacing: 1.5px; transition: 0.4s;
+            margin-top: 2rem;
+        }
+        .cta-btn:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(212,165,255,0.3); }
+
+        .nav-progress {
+            position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%);
+            display: flex; gap: 12px;
+        }
+        .dot { width: 8px; height: 8px; background: var(--glass-border); border-radius: 50%; transition: 0.4s; }
+        .dot.active { background: var(--accent-primary); width: 24px; border-radius: 10px; }
+    </style>
+</head>
+<body>
+    <div id="cursor"></div>
+    <div class="ambient-bg"><div class="blob blob-1"></div><div class="blob blob-2"></div></div>
+
+    <div class="content-wrapper">
+        <!-- Slide 1 -->
+        <section id="step1" class="active">
+            <span style="letter-spacing: 6px; color: var(--text-muted); text-transform: uppercase; font-size: 0.7rem; display: block; margin-bottom: 10px;">A Special Chapter</span>
+            <h1>Hello, Roji.</h1>
+            <button class="cta-btn" onclick="next(2)">Begin</button>
+        </section>
+
+        <!-- Slide 2: The Quote Chapter[cite: 1] -->
+        <section id="step2">
+            <div class="message-card">
+                <span class="quote-icon">“</span>
+                <p style="font-family: 'Playfair Display'; font-style: italic; font-size: 1.8rem; line-height: 1.6; color: #fff; margin-bottom: 10px;">
+                    Thinking back to where it all started, some things—and some people—never lose their spark.
+                </p>
+                <p style="font-family: 'Dancing Script', cursive; font-size: 1.5rem; color: var(--accent-secondary);">
+                    Keep shining, always.
+                </p>
+                <button class="cta-btn" onclick="next(3)">Continue</button>
+            </div>
+        </section>
+
+        <!-- Slide 3: The Celebration[cite: 1] -->
+        <section id="step3">
+            <h1>Happy Birthday, <br>Roji</h1>
+            <div class="message-card" id="wish-container">
+                <div class="cake-area">
+                    <div class="candle-wrapper"><div class="flame"></div><div class="candle"></div></div>
+                    <div class="candle-wrapper"><div class="flame" style="animation-delay: 0.1s"></div><div class="candle"></div></div>
+                    <div class="candle-wrapper"><div class="flame" style="animation-delay: 0.3s"></div><div class="candle"></div></div>
+                    <div class="candle-wrapper"><div class="flame" style="animation-delay: 0.2s"></div><div class="candle"></div></div>
+                    <div class="candle-wrapper"><div class="flame" style="animation-delay: 0.4s"></div><div class="candle"></div></div>
+                </div>
+                <p id="wish-text" style="font-size: 1.2rem; color: var(--text-muted); font-style: italic;">Make a wish, Roji...</p>
+                <button class="cta-btn" id="wish-btn" onclick="makeWish()">Make a Wish</button>
+            </div>
+        </section>
+    </div>
+
+    <div class="nav-progress">
+        <div id="dot1" class="dot active"></div>
+        <div id="dot2" class="dot"></div>
+        <div id="dot3" class="dot"></div>
+    </div>
+
+    <script>
+        const cursor = document.getElementById('cursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        function next(step) {
+            const current = document.querySelector('section.active');
+            const target = document.getElementById('step' + step);
+            current.style.opacity = '0';
+            current.style.transform = 'translateY(-20px)';
+            
+            setTimeout(() => {
+                current.classList.remove('active');
+                target.classList.add('active');
+                document.querySelectorAll('.dot').forEach(d => d.classList.remove('active'));
+                document.getElementById('dot' + step).classList.add('active');
+                setTimeout(() => {
+                    target.style.opacity = '1';
+                    target.style.transform = 'translateY(0)';
+                }, 50);
+            }, 800);
+        }
+
+        function makeWish() {
+            const flames = document.querySelectorAll('.flame');
+            flames.forEach((f, i) => {
+                setTimeout(() => f.classList.add('blown-out'), i * 150);
+            });
+            
+            const btn = document.getElementById('wish-btn');
+            btn.style.opacity = '0';
+            btn.style.pointerEvents = 'none';
+            
+            setTimeout(() => {
+                btn.style.display = 'none';
+                const wishText = document.getElementById('wish-text');
+                wishText.innerHTML = "May all your dreams come true! ✨";
+                wishText.style.color = 'var(--accent-primary)';
+                wishText.style.fontSize = '1.6rem';
+                document.getElementById('wish-container').style.boxShadow = '0 0 80px rgba(212,165,255,0.25)';
+            }, 500);
+        }
+    </script>
+</body>
+</html>
